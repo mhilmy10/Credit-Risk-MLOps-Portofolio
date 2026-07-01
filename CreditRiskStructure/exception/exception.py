@@ -1,7 +1,7 @@
 import sys
-from churn_reactivation_structure.logging import logger
+from CreditRiskStructure.logging import logger
 
-class ChurnReactivationStructure(Exception):
+class CreditRiskStructureException(Exception):
     def __init__(self,error_message,error_details:sys):
         self.error_message = error_message
         _,_,exc_tb = error_details.exc_info()
@@ -19,4 +19,4 @@ if __name__=='__main__':
         a=1/0
         print("This will not be printed",a)
     except Exception as e:
-           raise ChurnReactivationStructure(e,sys)
+           raise CreditRiskStructureException(e,sys)

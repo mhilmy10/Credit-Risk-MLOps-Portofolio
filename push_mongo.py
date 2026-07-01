@@ -13,15 +13,15 @@ ca=certifi.where()
 import pandas as pd
 import numpy as np
 import pymongo
-from churn_reactivation_structure.exception.exception import ChurnReactivationStructure
-from churn_reactivation_structure.logging.logger import logging
+from CreditRiskStructure.exception.exception import CreditRiskStructure
+from CreditRiskStructure.logging.logger import logging
 
 class ChurnReactivationDataExtract():
     def __init__(self):
         try:
             pass
         except Exception as e:
-            raise ChurnReactivationStructure(e,sys)
+            raise CreditRiskStructure(e,sys)
         
     def csv_to_json_convertor(self,file_path):
         try:
@@ -30,7 +30,7 @@ class ChurnReactivationDataExtract():
             records=list(json.loads(data.T.to_json()).values())
             return records
         except Exception as e:
-            raise ChurnReactivationStructure(e,sys)
+            raise CreditRiskStructure(e,sys)
         
     def insert_data_mongodb(self,records,database,collection):
         try:
@@ -42,13 +42,7 @@ class ChurnReactivationDataExtract():
             self.database = self.mongo_client[self.database]
             
             self.collection=self.database[self.collection]
-            batch_size = 1000
-
-            for i in range(0, len(self.records), batch_size):
-                batch = self.records[i:i+batch_size]
-                self.collection.insert_many(batch)
-                print(f"Inserted {i + len(batch)} records")            
-            
+            self.collection.insert_many(self.records)
             return(len(self.records))
             
         except Exception as e:
@@ -56,10 +50,10 @@ class ChurnReactivationDataExtract():
             traceback.print_exc()
             print(type(e))
             print(e)
-            raise ChurnReactivationStructure(e,sys)
+            raise CreditRiskStructure(e,sys)
         
 if __name__=='__main__':
-    FILE_PATH="churn_reactivation_data/reactivation_v6_final.csv"
+    FILE_PATH="CreditRiskData/credit_risk_dataset.csv"
     DATABASE="MuhammadHilmy"
     Collection="ChurnReactivationData"
     networkobj=ChurnReactivationDataExtract()

@@ -6,7 +6,10 @@ matplotlib
 seaborn
 certifi
 xgboost
-pymongo
 pymongo[srv]==3.11
+pyaml
+mlflow
+dagshub
 
+#dill
 ##-e .
