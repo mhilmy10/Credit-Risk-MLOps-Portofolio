@@ -30,7 +30,6 @@ class DataTransformation:
         
     def get_data_transformation_object(self, df: pd.DataFrame) -> Pipeline:
         try:
-            # Define the preprocessing steps for numerical and categorical features
             num_features = df.select_dtypes(include=[np.number]).columns.tolist()
             cat_features = df.select_dtypes(include=[object]).columns.tolist()
             # Create a pipeline for numerical features
@@ -78,6 +77,7 @@ class DataTransformation:
             save_numpy_array_data(self.data_transformation_config.transformed_test_file_path, input_feature_test_arr)
             # save preprocessor object 
             save_object(self.data_transformation_config.object_file_path, preprocessor)
+            save_object("final_model/preprocessor.pkl", preprocessor)
             # prepare artifact
             data_transformation_artifact = DataTransformationArtifact(
                 transformed_train_file_path=self.data_transformation_config.transformed_train_file_path,

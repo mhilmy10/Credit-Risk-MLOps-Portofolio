@@ -28,3 +28,14 @@ categorical_columns:
 boolean_columns:
 - cb_person_default_on_file
 
+data_cleansing:
+  drop_duplicates: True
+  missing_values:
+    loan_int_rate:
+      strategy: mean
+
+  remove_values:
+    person_emp_length:
+      values:
+        - 123
+        - 124

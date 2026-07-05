@@ -25,6 +25,25 @@ class DataValidation:
         except Exception as e:
             raise CreditRiskStructureException(e, sys)
         
+    @staticmethod
+    def data_cleansing(df: pd.DataFrame):
+        try:
+            before = len(df)
+            missing_values_before = df.isna().sum()
+            logging.info(f"Data Frame Shape Before Cleansing : {before}")
+            logging.info(f"Missing Values :{missing_values_before}")
+            df = df.copy()
+            df = df.drop_duplicates()
+            df['loan_int_rate'] = df['loan_int_rate'].fillna(df['loan_int_rate'].mean())
+            df.drop(df[df['person_emp_length'].isin([123, 124])].index)
+            missing_values_after = df.isna().sum()
+            after = len(df)
+            logging.info(f"Duplicate removed : {before-after}")
+            logging.info(f"Missing Values After Cleansing : {missing_values_after}")
+            return df
+        except Exception as e:
+            raise CreditRiskStructureException(e, sys)
+        
     def validate_data_schema(self, df: pd.DataFrame) -> bool:
         try:
             number_of_columns = len(self.schema_config["columns"])
@@ -35,7 +54,7 @@ class DataValidation:
             return False
         except Exception as e:
             raise CreditRiskStructureException(e, sys)
-        
+                
     def detect_data_drift(self, base_df: pd.DataFrame, current_df: pd.DataFrame, threshold = 0.5) -> bool:
         try:
             status = True
@@ -58,6 +77,7 @@ class DataValidation:
             dir_path = os.path.dirname(drift_report_file_path)
             os.makedirs(dir_path, exist_ok=True)
             write_yaml_file(file_path=drift_report_file_path, content=drift_report)
+            return status
         except Exception as e:
             raise CreditRiskStructureException(e, sys)
         
@@ -69,6 +89,10 @@ class DataValidation:
             logging.info("Reading training and testing data")
             train_df = DataValidation.read_data(train_file_path)
             test_df = DataValidation.read_data(test_file_path)
+            # data cleansing
+            logging.info("Data Cleansing Process")
+            train_df = DataValidation.data_cleansing(train_df)
+            test_df = DataValidation.data_cleansing(test_df)
             # data validation process
             logging.info("Validating training and testing data schema")
             is_train_validated = self.validate_data_schema(train_df)

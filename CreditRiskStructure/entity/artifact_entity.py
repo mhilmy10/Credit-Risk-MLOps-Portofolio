@@ -25,6 +25,8 @@ class ModelEvaluationArtifact:
     f1_score: float
     precision_score: float
     recall_score: float
+    roc_auc: float
+    gini: float
 
 @dataclass
 class ModelTrainerArtifact:

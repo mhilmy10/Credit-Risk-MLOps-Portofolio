@@ -18,8 +18,8 @@ import dagshub
 dagshub.init(repo_owner='mhilmy10', repo_name='Credit-Risk-MLOps-Portofolio', mlflow=True)
 
 os.environ['MLFLOW_TRACKING_URI'] = "https://dagshub.com/mhilmy10/Credit-Risk-MLOps-Portofolio.mlflow"
-mlflow.register_model(model_uri="https://dagshub.com/mhilmy10/Credit-Risk-MLOps-Portofolio.mlflow"
-                      ,name="CreditRiskModel")
+#mlflow.register_model(model_uri="https://dagshub.com/mhilmy10/Credit-Risk-MLOps-Portofolio.mlflow"
+#                      ,name="CreditRiskModel")
 
 
 class ModelTrainer:
@@ -37,10 +37,14 @@ class ModelTrainer:
             f1_score = classification_metric.f1_score
             precision_score = classification_metric.precision_score
             recall_score = classification_metric.recall_score
+            roc_auc = classification_metric.roc_auc
+            gini = classification_metric.gini
 
             mlflow.log_metric("f1_score", f1_score)
             mlflow.log_metric("precision_score", precision_score)
             mlflow.log_metric("recall_score", recall_score)
+            mlflow.log_metric("roc_auc", roc_auc)
+            mlflow.log_metric("gini", gini)
             mlflow.sklearn.log_model(best_model, "model")
             if tracking_uri_scheme != "file":
                 mlflow.sklearn.log_model(best_model, "model", registered_model_name="CreditRiskModel")
@@ -50,21 +54,10 @@ class ModelTrainer:
     def train_model(self, X_train, y_train, X_test, y_test):
         try:
             models = {
-                "LogisticRegression": LogisticRegression(),
-                "RandomForestClassifier": RandomForestClassifier(),
-                "XGBClassifier": XGBClassifier()
-            }
+                "LogisticRegression": LogisticRegression()}
             params = {
-                "LogisticRegression": {},
-                "RandomForestClassifier": {
-                    'n_estimators': [100, 200, 300],
-                    'max_depth': [3, 5, 7],
-                    'min_samples_split': [2, 5, 10]
-                },
-                "XGBClassifier": {
-                    'n_estimators': [100, 200, 300],
-                    'max_depth': [3, 5, 7],
-                    'learning_rate': [0.01, 0.1, 0.2]
+                "LogisticRegression": {
+                    'max_iter': [100, 200, 300],
                 }
             }
 
