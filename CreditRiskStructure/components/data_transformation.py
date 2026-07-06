@@ -72,9 +72,12 @@ class DataTransformation:
             # fit and transform on train data and transform on test data
             input_feature_train_arr = preprocessor.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessor.transform(input_feature_test_df)
+            # concatenate the target column back
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
             # save numpy array data
-            save_numpy_array_data(self.data_transformation_config.transformed_train_file_path, input_feature_train_arr)
-            save_numpy_array_data(self.data_transformation_config.transformed_test_file_path, input_feature_test_arr)
+            save_numpy_array_data(self.data_transformation_config.transformed_train_file_path, train_arr)
+            save_numpy_array_data(self.data_transformation_config.transformed_test_file_path, test_arr)
             # save preprocessor object 
             save_object(self.data_transformation_config.object_file_path, preprocessor)
             save_object("final_model/preprocessor.pkl", preprocessor)

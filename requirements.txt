@@ -10,6 +10,8 @@ pymongo[srv]==3.11
 pyaml
 mlflow
 dagshub
+streamlit
+fastapi
 
 #dill
 ##-e .

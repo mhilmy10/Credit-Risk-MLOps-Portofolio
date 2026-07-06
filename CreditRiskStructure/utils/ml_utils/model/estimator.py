@@ -21,3 +21,5 @@ class CreditRiskModel:
             return y_hat
         except Exception as e:
             raise CreditRiskStructureException(e,sys)
+
+    

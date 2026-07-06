@@ -35,7 +35,7 @@ class DataValidation:
             df = df.copy()
             df = df.drop_duplicates()
             df['loan_int_rate'] = df['loan_int_rate'].fillna(df['loan_int_rate'].mean())
-            df.drop(df[df['person_emp_length'].isin([123, 124])].index)
+            df = df.drop(df[df['person_emp_length'].isin([123, 124])].index)
             missing_values_after = df.isna().sum()
             after = len(df)
             logging.info(f"Duplicate removed : {before-after}")

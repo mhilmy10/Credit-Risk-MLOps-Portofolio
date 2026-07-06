@@ -1,0 +1,87 @@
+[ 2026-07-06 14:37:09,024 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-07-06 14:37:09,037 ] 107 dagshub - INFO - Accessing as mhilmy10
+[ 2026-07-06 14:37:09,787 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/mhilmy10/Credit-Risk-MLOps-Portofolio "HTTP/1.1 200 OK"
+[ 2026-07-06 14:37:10,514 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-07-06 14:37:10,517 ] 107 dagshub - INFO - Initialized MLflow to track repo "mhilmy10/Credit-Risk-MLOps-Portofolio"
+[ 2026-07-06 14:37:10,518 ] 107 dagshub - INFO - Repository mhilmy10/Credit-Risk-MLOps-Portofolio initialized!
+[ 2026-07-06 14:37:10,518 ] 18 root - INFO - Iniating Data Ingestion Process
+[ 2026-07-06 14:37:19,483 ] 51 root - INFO - Creating directory at Artifacts/07_06_2026_14_37_05/data_ingestion/feature_store
+[ 2026-07-06 14:37:19,553 ] 55 root - INFO - Data exported to feature store at Artifacts/07_06_2026_14_37_05/data_ingestion/feature_store
+[ 2026-07-06 14:37:19,558 ] 67 root - INFO - Train set shape: (24435, 12), Test set shape: (8146, 12)
+[ 2026-07-06 14:37:19,558 ] 69 root - INFO - Creating train test directory at Artifacts/07_06_2026_14_37_05/data_ingestion/ingested
+[ 2026-07-06 14:37:19,627 ] 74 root - INFO - Train and Test data saved at Artifacts/07_06_2026_14_37_05/data_ingestion/ingested/train.csv and Artifacts/07_06_2026_14_37_05/data_ingestion/ingested/test.csv
+[ 2026-07-06 14:37:19,627 ] 89 root - INFO - Data Ingestion Artifact: DataIngestionArtifact(trained_file_path='Artifacts/07_06_2026_14_37_05/data_ingestion/ingested/train.csv', test_file_path='Artifacts/07_06_2026_14_37_05/data_ingestion/ingested/test.csv')
+[ 2026-07-06 14:37:19,630 ] 21 root - INFO - Data Ingestion Artifact Completed
+[ 2026-07-06 14:37:19,631 ] 25 root - INFO - Iniating Data Validation Process
+[ 2026-07-06 14:37:19,631 ] 89 root - INFO - Reading training and testing data
+[ 2026-07-06 14:37:19,651 ] 93 root - INFO - Data Cleansing Process
+[ 2026-07-06 14:37:19,654 ] 33 root - INFO - Data Frame Shape Before Cleansing : 24435
+[ 2026-07-06 14:37:19,654 ] 34 root - INFO - Missing Values :person_age                       0
+person_income                    0
+person_home_ownership            0
+person_emp_length              678
+loan_intent                      0
+loan_grade                       0
+loan_amnt                        0
+loan_int_rate                 2308
+loan_status                      0
+loan_percent_income              0
+cb_person_default_on_file        0
+cb_person_cred_hist_length       0
+dtype: int64
+[ 2026-07-06 14:37:19,667 ] 41 root - INFO - Duplicate removed : 104
+[ 2026-07-06 14:37:19,667 ] 42 root - INFO - Missing Values After Cleansing : person_age                      0
+person_income                   0
+person_home_ownership           0
+person_emp_length             673
+loan_intent                     0
+loan_grade                      0
+loan_amnt                       0
+loan_int_rate                   0
+loan_status                     0
+loan_percent_income             0
+cb_person_default_on_file       0
+cb_person_cred_hist_length      0
+dtype: int64
+[ 2026-07-06 14:37:19,668 ] 33 root - INFO - Data Frame Shape Before Cleansing : 8146
+[ 2026-07-06 14:37:19,668 ] 34 root - INFO - Missing Values :person_age                      0
+person_income                   0
+person_home_ownership           0
+person_emp_length             217
+loan_intent                     0
+loan_grade                      0
+loan_amnt                       0
+loan_int_rate                 808
+loan_status                     0
+loan_percent_income             0
+cb_person_default_on_file       0
+cb_person_cred_hist_length      0
+dtype: int64
+[ 2026-07-06 14:37:19,672 ] 41 root - INFO - Duplicate removed : 10
+[ 2026-07-06 14:37:19,672 ] 42 root - INFO - Missing Values After Cleansing : person_age                      0
+person_income                   0
+person_home_ownership           0
+person_emp_length             217
+loan_intent                     0
+loan_grade                      0
+loan_amnt                       0
+loan_int_rate                   0
+loan_status                     0
+loan_percent_income             0
+cb_person_default_on_file       0
+cb_person_cred_hist_length      0
+dtype: int64
+[ 2026-07-06 14:37:19,672 ] 97 root - INFO - Validating training and testing data schema
+[ 2026-07-06 14:37:19,672 ] 50 root - INFO - Expected number of columns: 12
+[ 2026-07-06 14:37:19,672 ] 51 root - INFO - Actual number of columns: 12
+[ 2026-07-06 14:37:19,672 ] 50 root - INFO - Expected number of columns: 12
+[ 2026-07-06 14:37:19,672 ] 51 root - INFO - Actual number of columns: 12
+[ 2026-07-06 14:37:19,672 ] 105 root - INFO - Detecting data drift between training and testing data
+[ 2026-07-06 14:37:19,764 ] 111 root - INFO - Data validation completed successfully
+[ 2026-07-06 14:37:19,764 ] 27 root - INFO - Data Validation Artifact Completed
+[ 2026-07-06 14:37:19,764 ] 32 root - INFO - Iniating Data Transformation Process
+[ 2026-07-06 14:37:19,764 ] 56 root - INFO - Starting data transformation process
+[ 2026-07-06 14:37:20,365 ] 90 root - INFO - Data transformation process completed successfully
+[ 2026-07-06 14:37:20,365 ] 91 root - INFO - Data transformation artifact: DataTransformationArtifact(transformed_train_file_path='Artifacts/07_06_2026_14_37_05/data_transformation/transformed/train.npy', transformed_test_file_path='Artifacts/07_06_2026_14_37_05/data_transformation/transformed/test.npy', transformed_object_file_path='Artifacts/07_06_2026_14_37_05/data_transformation/transformed_object/preprocessing.pkl')
+[ 2026-07-06 14:37:20,366 ] 34 root - INFO - Data Transformation Artifact Completed
+[ 2026-07-06 14:37:20,366 ] 39 root - INFO - Iniating Model Trainer Process

@@ -57,7 +57,7 @@ class ModelTrainer:
                 "LogisticRegression": LogisticRegression()}
             params = {
                 "LogisticRegression": {
-                    'max_iter': [100, 200, 300],
+                    'max_iter': [100, 200, 300]
                 }
             }
 
@@ -85,7 +85,7 @@ class ModelTrainer:
             model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
             os.makedirs(model_dir_path, exist_ok=True)
             risk_model = CreditRiskModel(preprocessor=preprocessor, model=best_model)
-            save_object(file_path=self.model_trainer_config.trained_model_file_path, obj=CreditRiskModel)
+            save_object(file_path=self.model_trainer_config.trained_model_file_path, obj=risk_model)
             save_object("final_model/risk_model.pkl", risk_model)
             
             # create the model trainer artifact

@@ -1,0 +1,24 @@
+cb_person_cred_hist_length:
+  drift_status: true
+  p_value: 0.4968352225192145
+loan_amnt:
+  drift_status: false
+  p_value: 0.5996140211495395
+loan_int_rate:
+  drift_status: true
+  p_value: 9.167288178905074e-60
+loan_percent_income:
+  drift_status: false
+  p_value: 0.970398546294059
+loan_status:
+  drift_status: false
+  p_value: 0.9754604110808094
+person_age:
+  drift_status: false
+  p_value: 0.7792356692155387
+person_emp_length:
+  drift_status: true
+  p_value: .nan
+person_income:
+  drift_status: true
+  p_value: 0.39403850767546
