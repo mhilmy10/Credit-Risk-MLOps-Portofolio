@@ -49,6 +49,7 @@ class BatchPredictionPipeline:
 
             result_df = df.copy()
             result_df["prediction"] = predictions.astype(int)
+            result_df["label"] = result_df["prediction"]
             result_df["scores"] = probability_to_score(probabilities)
             result_df["probability_default"] = probabilities if probabilities is not None else None
 

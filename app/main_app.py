@@ -95,7 +95,7 @@ def predict_batch(file: UploadFile = File(...)):
                 prediction=int(row["prediction"]),
                 label=row["label"],
                 probability_default=round(float(row["probability_default"]), 4),
-                credit_score=int(row["credit_score"])            )
+                risk_score=int(row["scores"]))
             for idx, row in result_df.iterrows()
         ]
 

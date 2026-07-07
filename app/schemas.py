@@ -45,7 +45,7 @@ class LoanApplicant(BaseModel):
 
 class PredictionResponse(BaseModel):
     prediction: int = Field(..., description="0 = Low Risk (loan likely not default), 1 = High Risk (likely default)")
-    label: str = Field(..., description="Human readable label")
+    label: int = Field(..., description="Human readable label")
     probability_default: float = Field(..., description="Predicted probability of default")
     risk_score: int = Field(..., description="Default Risk Score, High Score means low risk")
 

@@ -111,14 +111,14 @@ with tab_single:
                 result = resp.json()
                 label = result["label"]
                 prob = result["probability_default"]
-                score = result["risk_score"]
+                score = result["credit_score"]
 
                 res_col1, res_col2 = st.columns([1, 1])
                 with res_col1:
-                    if label == "High Risk":
-                        st.error(f"### ⚠️ {label}")
+                    if label == 1:
+                        st.error(f"### ⚠️ High Risk (label={label})")
                     else:
-                        st.success(f"### ✅ {label}")
+                        st.success(f"### ✅ Low Risk (label={label})")
                     st.metric("Credit Score", score, help="Scorecard-style score, 300-850 (higher = lower risk)")
                     st.metric("Probability of Default", f"{prob * 100:.2f}%")
 
@@ -162,9 +162,9 @@ with tab_batch:
 
                     m1, m2, m3, m4 = st.columns(4)
                     m1.metric("Total Records", data["total_records"])
-                    m2.metric("High Risk", int((results_df["label"] == "High Risk").sum()))
-                    m3.metric("Low Risk", int((results_df["label"] == "Low Risk").sum()))
-                    m4.metric("Avg Credit Score", int(results_df["credit_score"].mean()))
+                    m2.metric("High Risk (1)", int((results_df["label"] == 1).sum()))
+                    m3.metric("Low Risk (0)", int((results_df["label"] == 0).sum()))
+                    m4.metric("Avg Credit Score", int(results_df["risk_score"].mean()))
 
                     chart_col1, chart_col2 = st.columns(2)
                     with chart_col1:
@@ -172,7 +172,7 @@ with tab_batch:
                         st.bar_chart(results_df["label"].value_counts())
                     with chart_col2:
                         st.write("Credit Score Distribution")
-                        st.bar_chart(results_df["credit_score"])
+                        st.bar_chart(results_df["risk_score"])
 
                     st.write("Detailed Results:")
                     st.dataframe(results_df, use_container_width=True)
