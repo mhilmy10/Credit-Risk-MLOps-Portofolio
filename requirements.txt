@@ -12,6 +12,9 @@ mlflow
 dagshub
 streamlit
 fastapi
+pydantic
+requests
+plotly
 
 #dill
 ##-e .

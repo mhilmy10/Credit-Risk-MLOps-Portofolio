@@ -21,5 +21,14 @@ class CreditRiskModel:
             return y_hat
         except Exception as e:
             raise CreditRiskStructureException(e,sys)
+        
+    def predict_proba(self, x):
+        try:
+            x_transform = self.preprocessor.transform(x)
+            proba = self.model.predict_proba(x_transform)
+            return proba[:, 1]
+        except Exception as e:
+            raise CreditRiskStructureException(e, sys)
+        
 
     
