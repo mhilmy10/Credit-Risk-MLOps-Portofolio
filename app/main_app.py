@@ -66,7 +66,7 @@ def predict_single(applicant: LoanApplicant):
 
         return PredictionResponse(
             prediction=pred_value,
-            label="High Risk" if pred_value == 1 else "Low Risk",
+            label=pred_value,
             probability_default=round(prob_value, 4),
             risk_score=score
         )

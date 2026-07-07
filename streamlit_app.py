@@ -12,13 +12,13 @@ API_URL = os.getenv("API_URL", "http://localhost:8000")
 st.set_page_config(page_title="Credit Risk Prediction", page_icon="💳", layout="wide")
 
 st.title("💳 Credit Risk Prediction")
-st.caption("MLOps portfolio project — FastAPI backend + Streamlit frontend")
+st.caption("MLOps portfolio project — Prediction Demo in Streamlit")
 
 
 def render_gauge(score: int):
-    if score >= 700:
+    if score >= 600:
         color = "#2ecc71"
-    elif score >= 600:
+    elif score >= 400:
         color = "#f1c40f"
     else:
         color = "#e74c3c"
@@ -30,9 +30,9 @@ def render_gauge(score: int):
             "axis": {"range": [300, 850]},
             "bar": {"color": color},
             "steps": [
-                {"range": [300, 600], "color": "#fadbd8"},
-                {"range": [600, 700], "color": "#fdebd0"},
-                {"range": [700, 850], "color": "#d5f5e3"},
+                {"range": [300, 400], "color": "#fadbd8"},
+                {"range": [400, 600], "color": "#fdebd0"},
+                {"range": [600, 850], "color": "#d5f5e3"},
             ],
         }
     ))
@@ -111,7 +111,7 @@ with tab_single:
                 result = resp.json()
                 label = result["label"]
                 prob = result["probability_default"]
-                score = result["credit_score"]
+                score = result["risk_score"]
 
                 res_col1, res_col2 = st.columns([1, 1])
                 with res_col1:
@@ -165,17 +165,6 @@ with tab_batch:
                     m2.metric("High Risk (1)", int((results_df["label"] == 1).sum()))
                     m3.metric("Low Risk (0)", int((results_df["label"] == 0).sum()))
                     m4.metric("Avg Credit Score", int(results_df["risk_score"].mean()))
-
-                    chart_col1, chart_col2 = st.columns(2)
-                    with chart_col1:
-                        st.write("Risk Label Distribution")
-                        st.bar_chart(results_df["label"].value_counts())
-                    with chart_col2:
-                        st.write("Credit Score Distribution")
-                        st.bar_chart(results_df["risk_score"])
-
-                    st.write("Detailed Results:")
-                    st.dataframe(results_df, use_container_width=True)
 
                     # Offer downloadable CSV (re-request the CSV-formatted endpoint)
                     uploaded_file.seek(0)
