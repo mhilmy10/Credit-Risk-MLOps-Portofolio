@@ -1,3 +1,0 @@
-[ 2026-07-07 16:31:08,127 ] 39 root - INFO - BatchPredictionPipeline loaded successfully at startup
-[ 2026-07-07 16:31:32,374 ] 43 root - INFO - Starting batch prediction
-[ 2026-07-07 16:31:39,611 ] 55 root - INFO - Batch prediction completed for 32581 records
