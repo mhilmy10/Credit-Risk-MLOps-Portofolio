@@ -1,4 +1,11 @@
 venv
 .env
 Artifacts
-logs
+logs.env
+.DS_Store
+mlflow.db
+Artifacts/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
